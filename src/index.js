@@ -66,6 +66,15 @@ class App{
 
 let app = new App("app");
 
-let rect1 = new App.Rect(app);
+app.app.onclick = (e)=>{
+    
+    app.addObject(new App.Rect(app, {
+        x: e.clientX,
+        y: e.clientY,
+        speedX: Math.random()*10,
+        speedY: Math.random()*10,
+        height: 50,
+        width: 50
+    }));
 
-app.addObject(rect1)
+}

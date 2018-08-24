@@ -34,7 +34,7 @@ class Rect{
 
     render(){
 
-        this.__move();        
+        this.__move();
 
         this.context.fillRect(this.property.x, this.property.y, this.property.width, this.property.height);
 
