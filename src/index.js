@@ -1,12 +1,14 @@
+const Rect = require('./components/Rect');
+
 class App{
+
+    static Rect = Rect;
 
     constructor(canvasElementID){
 
         this.app = document.getElementById(canvasElementID);
 
         this.context = this.app.getContext('2d');
-
-        this.x = 0;
 
         window.addEventListener("load", ()=>{
             this.__handleResize();
@@ -16,16 +18,26 @@ class App{
             this.__handleResize();
         })
 
+        this.objects = [];
+
         this.__render();
         
+    }
+
+    addObject(object){
+
+        this.objects.push(object);
+
     }
 
     __handleResize(){
 
         this.width = window.innerWidth;
+
         this.height = window.innerHeight;
 
         this.app.width = this.width;
+
         this.app.height = this.height;
 
     }
@@ -34,14 +46,26 @@ class App{
 
         requestAnimationFrame(this.__render.bind(this));
 
+        this.__clear();
+
+        for(let object of this.objects){
+
+            object.render();
+
+        }
+
+    }
+
+    __clear(){
+
         this.context.clearRect(0, 0, this.width, this.height);
-
-        this.x++;
-
-        this.context.fillRect(this.x, 0, 100, 100);
 
     }
 
 }
 
-new App("app");
+let app = new App("app");
+
+let rect1 = new App.Rect(app.context);
+
+app.addObject(rect1)
