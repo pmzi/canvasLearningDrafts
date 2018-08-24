@@ -66,6 +66,6 @@ class App{
 
 let app = new App("app");
 
-let rect1 = new App.Rect(app.context);
+let rect1 = new App.Rect(app);
 
 app.addObject(rect1)
