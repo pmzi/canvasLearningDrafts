@@ -24,12 +24,30 @@ class Rect{
     }
 
     __checkCrash(){
+
         if(this.property.x + this.property.width >= this.app.width || this.property.x < 0){
             this.property.speedX*=-1;
         }
+
         if(this.property.y + this.property.height >= this.app.height || this.property.y < 0){
             this.property.speedY*=-1;
-        }   
+        }
+
+        // check each others crash
+
+        for(let object of this.app.objects){
+
+            if(this.property.x + this.property.width >= object.property.x && this.property.x + this.property.width<= object.property.x + object.property.width && Math.abs(this.property.y - object.property.y) <= object.property.height){
+                this.property.speedX *= -1;
+                object.property.speedX *= -1;
+            }
+            if(this.property.y + this.property.height >= object.property.y && this.property.y + this.property.height<= object.property.y + object.property.height && Math.abs(this.property.x - object.property.x) <= object.property.width){
+                this.property.speedY *= -1;
+                object.property.speedY *= -1;
+            }
+
+        }
+
     }
 
     render(){
